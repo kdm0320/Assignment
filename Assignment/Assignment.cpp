@@ -1,4 +1,4 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include <bangtal.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,7 +10,7 @@ ObjectID button[3],nextButton[13],diceButton[2],goblin[2],magicianSkill[2],arrow
 messageBox[5],damages[3],number[3],MONSTER_HP,PLAYER_HP,monsterSkills,HP[2],healObject[4],healing,
 monsterName,warning;
 TimerID firstTimer[10],secondTimer[10],thirdTimer[4],deleteName,warnSign[3],lastTimer,Show_Monster_Dice;
-SoundID bgm[9],playerSkill[10],enemySkill[5],Boss_Skill[5];
+SoundID bgm[10],playerSkill[10],enemySkill[5],Boss_Skill[5];
 
 int dices[7], Monster_Dice_Number[6],Heal_Dice[7],warnCount=2;
 int countFight = 3; //전투 횟수 설정 변수
@@ -75,6 +75,7 @@ void createSound() {    //사운드 생성함수
     bgm[6] = createSound("Images/sounds/bossDeath.mp3");
     bgm[7] = createSound("Images/sounds/cave.mp3");
     bgm[8] = createSound("Images/sounds/escape.mp3");
+    bgm[9] = createSound("Images/sounds/dice.mp3");
     playerSkill[0] = createSound("Images/skills/magician/energyBolt0.mp3");
     playerSkill[1] = createSound("Images/skills/magician/energyBolt1.mp3");
     playerSkill[2] = createSound("Images/skills/magician/fireball0.mp3");
@@ -528,13 +529,14 @@ void mouseCallback(ObjectID object, int x, int y, MouseAction) {
     }
    
     else if (object == diceButton[1]) {     // 인게임 다이스버튼
-       
-         setObjectImage(diceButton[1], "Images/buttons/dice1.png");
+        playSound(bgm[9]);
+;         setObjectImage(diceButton[1], "Images/buttons/dice1.png");
          setTimer(firstTimer, 2, 0.5f);
         
     }
     else if (object == diceButton[0]) {     //튜토리얼 다이스버튼
         if (IsonDice) {
+            playSound(bgm[9]);
             hideObject(arrow);
             hideObject(click);
             hideObject(diceBox);
