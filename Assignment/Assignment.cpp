@@ -13,17 +13,17 @@ TimerID firstTimer[10],secondTimer[10],thirdTimer[4],deleteName,warnSign[3],last
 SoundID bgm[10],playerSkill[10],enemySkill[5],Boss_Skill[5];
 
 int dices[7], Monster_Dice_Number[6],Heal_Dice[7],warnCount=2;
-int countFight = 3; //전투 횟수 설정 변수
-float  skillTimer = 1.0f; //스킬 사이 간격을 조절하는 변수
+int countFight = 3; 
+float  skillTimer = 1.0f; 
 bool  IsonDice=true,IsonBoss=false, IsmessageOn=true;
 char MonsterNumbers[50];
 
-typedef struct _Status{ // 플레이어 hp 구조체
+typedef struct _Status{ 
     int hp;
    
 }playerStatus;
 
-typedef struct __Status { //몬스터 hp 구조체
+typedef struct __Status { 
     int hp;
     
 }monsterStatus;
@@ -44,12 +44,12 @@ ObjectID createObject(const char* image, SceneID scene, int x, int y, bool shown
     return object;
 }
 
-void setTimer(TimerID*timers, int timerNumber, float time) { //타이머 설정함수 - 타이머이름/시간 설정 
+void setTimer(TimerID*timers, int timerNumber, float time) {
     setTimer(timers[timerNumber], time);
     startTimer(timers[timerNumber]);
 }
 
-void createScene() { //장면생성함수
+void createScene() { 
     scene[0] = createScene("start", "Images/scenes/start.png");
     scene[1] = createScene("second", "Images/scenes/choose.png");
     scene[2] = createScene("second", "Images/scenes/choose1.png");
@@ -65,7 +65,7 @@ void createScene() { //장면생성함수
 
 
 }
-void createSound() {    //사운드 생성함수
+void createSound() {   
     bgm[0] = createSound("Images/sounds/start.mp3");
     bgm[1] = createSound("Images/sounds/death.mp3");
     bgm[2] = createSound("Images/sounds/healSound.mp3");
@@ -102,13 +102,13 @@ void createSound() {    //사운드 생성함수
 
 
 }
-void createNextButton(int nextButtonNumber, int sceneNumber) { //next버튼 생성함수
+void createNextButton(int nextButtonNumber, int sceneNumber) {
     nextButton[nextButtonNumber] = createObject("Images/buttons/next.png", scene[sceneNumber], 1100, 50, true);
 
 }
 
 
-void magicionSkill0(int number) { //플레이어 스킬 설정 함수(1) - 처음 스킬 효과 이미지 생성
+void magicionSkill0(int number) { 
     switch (number)
     {   case 0:
             return;
@@ -138,7 +138,7 @@ void magicionSkill0(int number) { //플레이어 스킬 설정 함수(1) - 처�
     }
     
 }
-void magicionSkill1(int number) { //플레이어 스킬 설정 함수(2) - 두번째 스킬 효과 이미지 / 데미지 설정
+void magicionSkill1(int number) { 
     switch (number)
     {
     case 0:
@@ -183,7 +183,7 @@ void magicionSkill1(int number) { //플레이어 스킬 설정 함수(2) - 두�
     }
 
 }
-void monsterSkill(int number) { //몬스터 스킬 설정함수 - 데미지/이펙트 위치/이펙트종류 설정가능
+void monsterSkill(int number) { 
     switch (number)
     {
     case 0:
@@ -222,7 +222,7 @@ void monsterSkill(int number) { //몬스터 스킬 설정함수 - 데미지/이�
       }
 
 }
-void bossSkill(int number) { //보스 스킬 설정함수 - 데미지/이펙트 위치/이펙트종류 설정가능
+void bossSkill(int number) { 
     switch (number)
     {
     case 0:
@@ -261,8 +261,8 @@ void bossSkill(int number) { //보스 스킬 설정함수 - 데미지/이펙트 
     }
 
 }
-void mixDice() { // 플레이어 스킬 무작위 숫자 생성 및 확률 조정함수
-    int count = 100; //무작위 횟수 설정 변수
+void mixDice() { 
+    int count = 100; 
     char numbers[50];
     for (int i = 0; i < 7; i++) {
         dices[i] = i;
@@ -282,8 +282,8 @@ void mixDice() { // 플레이어 스킬 무작위 숫자 생성 및 확률 조�
     number[1] = createObject(numbers, scene[4], 1050, 300, true);
         
 }
-void healDice() { // 플레이어 회복 무작위 숫자 생성 및 확률 조정 함수
-    int count = 60; //무작위 횟수 설정 변수
+void healDice() {
+    int count = 60; 
     char numbers[50];
     for (int i = 0; i < 7; i++) {
         Heal_Dice[i] = i;
@@ -304,7 +304,7 @@ void healDice() { // 플레이어 회복 무작위 숫자 생성 및 확률 조�
 
 }
 void monsterDice() {
-    int count = 100; //몬스터 등장/스킬 무작위 횟수 설정 변수
+    int count = 100;
     for (int i = 0; i < 6; i++) {
         Monster_Dice_Number[i] = i;
     }
@@ -319,7 +319,7 @@ void monsterDice() {
 }
 
 
-void createPlayerHp(int hp) { //플레이어 hp 생성함수
+void createPlayerHp(int hp) { 
     ps->hp = hp;
     char playerHp[40];
     sprintf(playerHp, "Images/hp/%d.png", hp);
@@ -327,7 +327,7 @@ void createPlayerHp(int hp) { //플레이어 hp 생성함수
     PLAYER_HP=createObject(playerHp, scene[4], 140, 660, true);
 }
 
-void setMonsterHp(int hp) {//몬스터 hp생성함수
+void setMonsterHp(int hp) {
     ms->hp = hp;
     char monsterHp[40];
     sprintf(monsterHp, "Images/hp/%d.png", hp);
@@ -335,17 +335,17 @@ void setMonsterHp(int hp) {//몬스터 hp생성함수
     MONSTER_HP=createObject(monsterHp, scene[4], 1130, 660, true);
     
 }
-void setBoss() { // 보스 생성및 hp 설정함수
+void setBoss() { 
     setMonsterHp(150);
     goblin[1] = createObject("Images/monsters/6.png", scene[4], 460, 100, true);
     monsterName = createObject("Images/monsters/name6.png", scene[4], 540, 50, true);
 
    
 }
-void changePlayerHp(int hp) { //플레이어 hp가 변하는 것을 리턴하는 함수
+void changePlayerHp(int hp) {
     char playerHp[40];
     sprintf(playerHp, "Images/hp/%d.png", hp);
-    if (ps->hp > 180) {     //플레이어 최대 hp이상 오르지 않도록 설정
+    if (ps->hp > 180) {     
         ps->hp = 180;
         setObjectImage(PLAYER_HP, "Images/hp/180.png");
     }
@@ -355,13 +355,13 @@ void changePlayerHp(int hp) { //플레이어 hp가 변하는 것을 리턴하는
 
   
 }
-void changeMonsterHp(int hp) {//몬스터 hp가 변하는 것을 리턴하는 함수
+void changeMonsterHp(int hp) {
     char monsterHp[40];
     sprintf(monsterHp, "Images/hp/%d.png", hp);
     setObjectImage(MONSTER_HP, monsterHp);
     
 }
-void createMonsters(int x) { //몬스터 생성에 관한 무작위 숫자 생성 및 몬스터 hp 설정 함수
+void createMonsters(int x) {
     
     switch (x)
     {
@@ -402,7 +402,7 @@ void createMonsters(int x) { //몬스터 생성에 관한 무작위 숫자 생�
         return;
     }
 }
-void Heal(int x) { //플레이어 회복시 발생하는 숫자에 대해 각각 회복량을 설정하는 함수
+void Heal(int x) { 
 
     switch (x)
     {
@@ -448,7 +448,7 @@ void Heal(int x) { //플레이어 회복시 발생하는 숫자에 대해 각각
 
 
 }
-void startTutorial() { // 인트로 이후 튜토리얼을 시작하는 함수
+void startTutorial() { 
     enterScene(scene[4]);
     createPlayerHp(100);
     createMonsters(0);
@@ -461,7 +461,7 @@ void startTutorial() { // 인트로 이후 튜토리얼을 시작하는 함수
 
 
 }
-void initialize() { //게임오버시 초기화하는 함수 - 게임초기화/게임오버화면으로 넘어감/restart버튼 생성
+void initialize() { 
     if (ps->hp <= 0) {
         enterScene(scene[5]);
         playSound(bgm[4]);
@@ -480,7 +480,7 @@ void initialize() { //게임오버시 초기화하는 함수 - 게임초기화/�
     }
   
 }
-void Create_Timer() { // 타이머생성함수
+void Create_Timer() { 
     for (int i = 0; i < 10; i++) {
         firstTimer[i] = createTimer(1);
 
@@ -507,7 +507,7 @@ void Create_Timer() { // 타이머생성함수
     hideTimer;
 }
 
-void createGame() {  //처음에 게임을 시작하는 함수 - 장면/next버튼/타이머/start버튼 생성/ 게임시작
+void createGame() {  
     createScene();
     createNextButton(0, 2);
     button[0] = createObject("Images/buttons/start.png", scene[0], 550, 270, true);
@@ -518,23 +518,23 @@ void createGame() {  //처음에 게임을 시작하는 함수 - 장면/next버�
 }
 
 void mouseCallback(ObjectID object, int x, int y, MouseAction) {
-    if (object == button[0]) {      //스타트버튼
+    if (object == button[0]) {      
         enterScene(scene[1]);
         setTimer(firstTimer,0, 0.7);
     }
-    else if (object == nextButton[0]) {     //튜토리얼로 넘어가는 Next버튼
+    else if (object == nextButton[0]) {     
         enterScene(scene[3]);
         setTimer(firstTimer,1, 0.7);
 
     }
    
-    else if (object == diceButton[1]) {     // 인게임 다이스버튼
+    else if (object == diceButton[1]) {    
         playSound(bgm[9]);
 ;         setObjectImage(diceButton[1], "Images/buttons/dice1.png");
          setTimer(firstTimer, 2, 0.5f);
         
     }
-    else if (object == diceButton[0]) {     //튜토리얼 다이스버튼
+    else if (object == diceButton[0]) {     
         if (IsonDice) {
             playSound(bgm[9]);
             hideObject(arrow);
@@ -545,7 +545,7 @@ void mouseCallback(ObjectID object, int x, int y, MouseAction) {
             IsonDice = false;
         }
     }
-    else if (object == nextButton[1]) { //튜토리얼 Next버튼(1)
+    else if (object == nextButton[1]) { 
         hideObject(number[0]);
         hideObject(messageBox[0]);
         hideObject(diceButton[0]);
@@ -555,11 +555,11 @@ void mouseCallback(ObjectID object, int x, int y, MouseAction) {
         setTimer(firstTimer, 9, skillTimer);
 
     }
-    else if (object == nextButton[2]) {     //튜토리얼 Next버튼(3)
+    else if (object == nextButton[2]) {    
         hideObject(HP[0]);
         hideObject(PLAYER_HP);
         changeMonsterHp(100);
-        createPlayerHp(180);              // 플레이어 hp 초기 및 최대치 설정(최대치 = 200)
+        createPlayerHp(180);              
         showObject(diceButton[1]);
         hideObject(nextButton[2]);
         hideObject(messageBox[1]);
@@ -568,7 +568,7 @@ void mouseCallback(ObjectID object, int x, int y, MouseAction) {
     }
   
     
-    else if (object == nextButton[3]) { //힐 Next버튼
+    else if (object == nextButton[3]) { 
         if (IsmessageOn) {
             healObject[0] = createObject("Images/effects/healObject0.png", scene[4], 200, 10, true);
             healObject[1] = createObject("Images/effects/healObject1.png", scene[4], 800, 50, true);
@@ -586,14 +586,14 @@ void mouseCallback(ObjectID object, int x, int y, MouseAction) {
         hideObject(nextButton[3]);
   
     }
-    else if (object == healObject[1]) {     //힐 스위치
+    else if (object == healObject[1]) {    
         hideObject(arrow);
         hideObject(click);
         hideObject(messageBox[2]);
         setObjectImage(healObject[2], "Images/effects/healObject3.png");
         setTimer(secondTimer, 6, 0.8);
     }
-    else if (object == nextButton[4]) { //힐끝나는 next버튼
+    else if (object == nextButton[4]) { 
         hideObject(healObject[0]);
         hideObject(healObject[1]);
         hideObject(healObject[2]);
@@ -603,7 +603,7 @@ void mouseCallback(ObjectID object, int x, int y, MouseAction) {
         setTimer(secondTimer,7,1.0f);
         hideObject(nextButton[4]);
     }
-    else if (object == nextButton[5]) { //다음 전투로 넘어가는 next버튼
+    else if (object == nextButton[5]) { 
         stopSound(bgm[2]);
         countFight--;
         if (countFight <= 0) {
@@ -620,32 +620,32 @@ void mouseCallback(ObjectID object, int x, int y, MouseAction) {
             hideObject(nextButton[5]);
         }
     }
-    else if (object == nextButton[6]) {      //엔딩 넥스트버튼(1)
+    else if (object == nextButton[6]) {      
         playSound(bgm[7]);
         enterScene(scene[6]);
         createNextButton(7, 6);
         hideObject(nextButton[6]);
         
     }
-    else if (object == nextButton[7]) {      //엔딩 넥스트버튼(2)
+    else if (object == nextButton[7]) {     
         enterScene(scene[7]);
         createNextButton(8, 7);
         hideObject(nextButton[7]);
 
     }
-    else if (object == nextButton[8]) {     //엔딩 넥스트버튼(3)
+    else if (object == nextButton[8]) {    
     enterScene(scene[8]);
     createNextButton(9, 8);
     hideObject(nextButton[8]);
 
     }
-    else if (object == nextButton[9]) {     //엔딩 넥스트버튼(4)
+    else if (object == nextButton[9]) {     
     enterScene(scene[9]);
     createNextButton(10, 9);
     hideObject(nextButton[9]);
 
     }
-    else if (object == nextButton[10]) {    //엔딩 넥스트버튼(5)
+    else if (object == nextButton[10]) {    
         stopSound(bgm[7]);
         playSound(bgm[8]);
         enterScene(scene[10]);
@@ -653,25 +653,25 @@ void mouseCallback(ObjectID object, int x, int y, MouseAction) {
         hideObject(nextButton[10]);
 
     }
-    else if (object == nextButton[11]) {    //엔딩 넥스트버튼(6)
+    else if (object == nextButton[11]) {    
     enterScene(scene[3]);
     setTimer(lastTimer, 1.0f);
     startTimer(lastTimer);
     
     }
    
-    else if (object == button[1]) {         //restart버튼
+    else if (object == button[1]) {         
         enterScene(scene[0]);
         stopSound(bgm[4]);
         playSound(bgm[0]);
        
     }
-    else if (object == button[2]) {         //end버튼
+    else if (object == button[2]) {        
         free(ps);
         free(ms);
         endGame();
     }
-    else if (object = nextButton[12]) {     //튜토리얼 Next버튼(2)
+    else if (object = nextButton[12]) {     
     hideObject(messageBox[3]);
     hideObject(nextButton[12]);
     setTimer(thirdTimer, 3, skillTimer);
@@ -681,18 +681,18 @@ void mouseCallback(ObjectID object, int x, int y, MouseAction) {
 }
 void timerCallback(TimerID timer) {
     
-    if (timer == firstTimer[0]) { //처음 인트로 등장
+    if (timer == firstTimer[0]) { 
         enterScene(scene[2]);
     }
-    else if (timer == firstTimer[1]) {      // 튜토리얼 시작
+    else if (timer == firstTimer[1]) {     
         stopSound(bgm[0]);
         startTutorial();
     }
-    else if (timer == firstTimer[7]) { //튜토리얼 다이스버튼효과
+    else if (timer == firstTimer[7]) { 
         setObjectImage(diceButton[0], "Images/buttons/dice0.png");
         setTimer(firstTimer, 8, 0.3);
     }
-    else if (timer == firstTimer[8]) { //튜토리얼 숫자등장/메세지
+    else if (timer == firstTimer[8]) { 
         number[0] = createObject("Images/dices/1.png", scene[4], 1050, 300, true);
         messageBox[0] = createObject("Images/effects/messageBox.png", scene[4], 954, 400, true);
         createNextButton(1, 4);
@@ -700,14 +700,14 @@ void timerCallback(TimerID timer) {
     }
 
 
-    else if (timer == firstTimer[9]) { //튜토리얼 플레이어 스킬 시작
+    else if (timer == firstTimer[9]) {
         magicionSkill1(1);
         hideObject(magicianSkill[0]);
         setTimer(secondTimer, 0, skillTimer);
 
     }
 
-    else if (timer == secondTimer[0]) {    // 튜토리얼 플레이어 스킬 끝
+    else if (timer == secondTimer[0]) {   
         hideObject(magicianSkill[1]);
         hideObject(damages[1]);
         changeMonsterHp(ms->hp);
@@ -718,17 +718,17 @@ void timerCallback(TimerID timer) {
         setTimer(thirdTimer, 0, skillTimer);
 
     }
-    else if (timer == thirdTimer[0]) {      //튜토리얼 몬스터 무작위 숫자
+    else if (timer == thirdTimer[0]) {      
         number[1] = createObject("Images/dices/1.png", scene[4], 200, 300, true);
         setTimer(thirdTimer, 1, skillTimer);
 
     }
-    else if (timer == thirdTimer[1]) {      //튜토리얼 몬스터 스킬 시작
+    else if (timer == thirdTimer[1]) {      
         hideObject(number[1]);
         monsterSkill(1);
         setTimer(thirdTimer, 2, skillTimer);
     }
-    else if (timer == thirdTimer[2]) {      //메세지박스 생성
+    else if (timer == thirdTimer[2]) {    
         hideObject(monsterSkills);
         hideObject(damages[2]);
         changePlayerHp(ps->hp);
@@ -736,7 +736,7 @@ void timerCallback(TimerID timer) {
         createNextButton(12, 4);
 
     }
-    else if (timer == thirdTimer[3]) {      //튜토리얼 끝
+    else if (timer == thirdTimer[3]) {     
         messageBox[1] = createObject("Images/effects/messageBox0.png", scene[4], 400, 400, true);
         createNextButton(2, 4);
 
@@ -745,18 +745,18 @@ void timerCallback(TimerID timer) {
         hideObject(monsterName);
     }
    
-    else if (timer== firstTimer[2]) {        //다이스 버튼 효과 
+    else if (timer== firstTimer[2]) {        
         setObjectImage(diceButton[1], "Images/buttons/dice0.png");
                
         setTimer(firstTimer, 3, 0.3f);
 
     }
-    else if (timer == firstTimer[3]) {      //무작위 숫자 시작 
+    else if (timer == firstTimer[3]) {     
         mixDice();
         setTimer(firstTimer, 4, 0.5f);
 
     }
-    else if (timer == firstTimer[4]) {       // 플레이어 스킬 시작 / 플레이어 미스인경우 MIss 이미지 시작
+    else if (timer == firstTimer[4]) {      
         hideObject(diceButton[1]);
         hideObject(number[1]);
         magicionSkill0(dices[0]);
@@ -770,18 +770,18 @@ void timerCallback(TimerID timer) {
         }
     }
 
-    else if (timer == firstTimer[5]) {      //플레이어 스킬 이펙트
+    else if (timer == firstTimer[5]) {      
         hideObject(magicianSkill[0]);
         magicionSkill1(dices[0]);
         setTimer(firstTimer, 6, skillTimer);
     }
-    else if (timer == secondTimer[4]) {    //MIss 이미지 끝/플레이어 턴 끝
+    else if (timer == secondTimer[4]) {    
         hideObject(damages[0]);
         setTimer(secondTimer, 1, skillTimer);
 
 
     }
-    else if (timer == firstTimer[6]) {      //플레이어 스킬/턴 끝
+    else if (timer == firstTimer[6]) {     
         hideObject(magicianSkill[1]);
         hideObject(damages[1]); 
         changeMonsterHp(ms->hp);
@@ -801,7 +801,7 @@ void timerCallback(TimerID timer) {
        
 
 
-    else if (timer == secondTimer[1]) {    //몬스터 턴 시작/Miss 숫자 등장
+    else if (timer == secondTimer[1]) {   
         monsterDice();
         sprintf(MonsterNumbers, "Images/dices/%d.png", Monster_Dice_Number[0]);
         number[1] = createObject(MonsterNumbers, scene[4], 200, 300, true);
@@ -809,7 +809,7 @@ void timerCallback(TimerID timer) {
         startTimer(Show_Monster_Dice);
        
     }
-    else if (timer == Show_Monster_Dice) { //몬스터 무작위 숫자 등장
+    else if (timer == Show_Monster_Dice) {
         hideObject(number[1]);
         if (Monster_Dice_Number[0] == 0) {
             damages[0] = createObject("Images/damages/0.png", scene[4], 800, 250, true);
@@ -828,22 +828,22 @@ void timerCallback(TimerID timer) {
             }
         }
     }
-    else if (timer == secondTimer[9]) {    //몬스터  MIss 이미지 숨김
+    else if (timer == secondTimer[9]) {    
         hideObject(damages[0]);
         setTimer(secondTimer, 3, skillTimer);
     }
-    else if (timer == secondTimer[2]) {    //몬스터 턴 끝/ 플레이어 게임오버인경우
+    else if (timer == secondTimer[2]) {   
         hideObject(monsterSkills);
         hideObject(damages[2]);
         changePlayerHp(ps->hp);
         initialize();
         setTimer(secondTimer, 3, skillTimer);
     }
-    else if (timer == secondTimer[3]) {    //다시 플레이어 턴
+    else if (timer == secondTimer[3]) {    
         showObject(diceButton[1]);
     }
 
-    else if (timer == secondTimer[5]) {     //플레이어 승리
+    else if (timer == secondTimer[5]) {     
         if (IsonBoss == false) {
             hideObject(HP[1]);
             hideObject(MONSTER_HP);
@@ -860,22 +860,22 @@ void timerCallback(TimerID timer) {
             createNextButton(6, 4);
         }
     }
-    else if (timer == secondTimer[6]) {    //힐  숫자 등장
+    else if (timer == secondTimer[6]) {   
           healDice();
         createNextButton(4, 4);
     }
-    else if (timer == secondTimer[7]) {    //힐 끝
+    else if (timer == secondTimer[7]) {   
     hideObject(healObject[3]);
     hideObject(number[2]);
     hideObject(healing);
     createNextButton(5, 4);
     }
-    else if (timer == warnSign[0]) {     //보스 시작 전 sign 1
+    else if (timer == warnSign[0]) {    
     playSound(bgm[3]);
     warning = createObject("Images/effects/warning.png", scene[4], 300, 400, true);
     setTimer(warnSign,1, 0.5f);
     }
-    else if (timer == warnSign[1]) {     //보스 시작 전 sign 2
+    else if (timer == warnSign[1]) {     
     warnCount--;
     hideObject(warning);
     for (int i = 0; i < warnCount; i++) {
@@ -886,20 +886,20 @@ void timerCallback(TimerID timer) {
         setTimer(warnSign, 2, 0.8f);
     }
     }
-    else if (timer == warnSign[2]) {    //보스 생성 
+    else if (timer == warnSign[2]) {   
     stopSound(bgm[3]);
     setBoss();
     showObject(diceButton[1]);;
     
     }
-    else if (timer == secondTimer[8]) {   //보스전 시작
+    else if (timer == secondTimer[8]) {  
     hideObject(healObject[3]);
     hideObject(number[2]);
     hideObject(healing);
     createNextButton(5, 4);
     }
    
-    else if (timer == lastTimer) {      //게임종료
+    else if (timer == lastTimer) {     
     free(ps);
     free(ms);
     endGame();
@@ -908,12 +908,12 @@ void timerCallback(TimerID timer) {
  
 }
 
-void settingGameOption() {       //게임옵션 설정함수
+void settingGameOption() {       
     setGameOption(GameOption::GAME_OPTION_INVENTORY_BUTTON, false);
     setGameOption(GameOption::GAME_OPTION_ROOM_TITLE, false);
     setGameOption(GameOption::GAME_OPTION_MESSAGE_BOX_BUTTON, false);
 }
-void setCallback() {             //콜백함수 세팅 함수
+void setCallback() {            
     setMouseCallback(mouseCallback);
     setTimerCallback(timerCallback);
 }
