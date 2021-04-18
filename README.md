@@ -12,11 +12,11 @@
 
 ### 사운드가 있으니 소리에 주의해주세요.
 
-# 전투횟수 조정 = countFight 변수 숫자 조정
-# 플레이어 체력 조정 = 마우스 콜백함수 object==nextButton[2]에서 createPlayerHp 인수 조정
-#                      - changePlayerHP에서 ps->hp 조정
+ 전투횟수 조정 = countFight 변수 숫자 조정
+ 플레이어 체력 조정 = 마우스 콜백함수 object==nextButton[2]에서 createPlayerHp 인수 조정
+                    - changePlayerHP에서 ps->hp 조정
 
-# 몬스터 체력 조정 = createMonsters에서 setMonsterHp 인수 조정
-# 보스 체력 조정 = setBoss에서 setMonsterHp 인수 조정
-# 스킬데미지 조정 = magicionSkill1, monsterSkill, bossSkill에서 데미지 조정
-# 힐 = Heal 함수에서 ps->hp 조정
+몬스터 체력 조정 = createMonsters에서 setMonsterHp 인수 조정
+보스 체력 조정 = setBoss에서 setMonsterHp 인수 조정
+스킬데미지 조정 = magicionSkill1, monsterSkill, bossSkill에서 데미지 조정
+힐 = Heal 함수에서 ps->hp 조정
