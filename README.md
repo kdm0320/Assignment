@@ -14,7 +14,7 @@
 
  전투횟수 조정 = countFight 변수 숫자 조정  
  플레이어 체력 조정 = 마우스 콜백함수 object==nextButton[2]에서 createPlayerHp 인수 조정  
-                    - changePlayerHP에서 ps->hp 조정  
+                         - changePlayerHP에서 ps->hp 조정  
 
 몬스터 체력 조정 = createMonsters에서 setMonsterHp 인수 조정  
 보스 체력 조정 = setBoss에서 setMonsterHp 인수 조정  
